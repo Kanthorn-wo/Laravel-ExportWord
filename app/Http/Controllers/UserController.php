@@ -31,18 +31,18 @@ class UserController extends Controller
 
         // Replace placeholders with user data
         $template->setValue('id', $user->id);
-        $template->setValue('name', $user->name);
+        $template->setValue('name', $user->fname);
         $template->setValue('email', $user->email);
         $template->setValue('address', $user->address);
 
         // Set the file name for the generated document
-        $fileName = $user->name;
+        $fileName = $user->fname . '.docx'; // Include the name in the filename
 
         // Save the generated document to a temporary file
-        $template->saveAs($fileName . '.docx');
+        $template->saveAs($fileName);
 
-        // Return the generated document for download
-        return response()->download($fileName . '.docx')->deleteFileAfterSend(true);
+        // Return the generated document for download with the proper filename
+        return response()->download($fileName)->deleteFileAfterSend(true);
     }
 
 }

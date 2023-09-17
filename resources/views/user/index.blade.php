@@ -12,6 +12,8 @@
 
   <title>Hello, world!</title>
 </head>
+{{-- create data
+User::factory()->count(50)->create(); --}}
 
 <body>
   <div class="container">
@@ -21,19 +23,21 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">First</th>
-              <th scope="col">Last</th>
-              <th scope="col">Handle</th>
+              <th scope="col">Student ID</th>
+              <th scope="col">Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Action</th>
             </tr>
           </thead>
           @php
-          $id = 0
+          $id = 1
           @endphp
           @foreach ($user as $item)
           <tbody>
             <tr>
               <th scope="row">{{ $id++ }}</th>
-              <td>{{ $item->name }}</td>
+              <td>{{ $item->student_id }}</td>
+              <td>{{ $item->fname }}</td>
               <td>{{ $item->email }}</td>
               <td>
                 <a href="{{ url('/user'.$item->id) }}" class="btn btn-warning">
@@ -41,8 +45,19 @@
                 </a>
               </td>
               <td>
+                <a href="{{ url('/form'.$item->id) }}" class="btn btn-primary">
+                  กยศ.
+                </a>
+              </td>
+              <td>
                 <a href="{{ url('/coop'.$item->id) }}" class="btn btn-success">
                   Coop
+                </a>
+              </td>
+
+              <td>
+                <a href="{{ url('/form/upload'.$item->id) }}" class="btn btn-secondary">
+                  Upload File
                 </a>
               </td>
             </tr>
@@ -66,6 +81,7 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
     integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous">
   </script>
+
 </body>
 
 </html>

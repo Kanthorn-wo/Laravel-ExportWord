@@ -10,48 +10,70 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
+  <style>
+    td {
+      max-width: 100px;
+      /* Set the maximum width of td */
+      white-space: nowrap;
+      /* Prevent text from wrapping */
+      overflow: hidden;
+      /* Hide overflowing text */
+      text-overflow: ellipsis;
+      /* Show ellipsis for overflow */
+      transition: white-space 0.5s;
+      /* Add a transition for smooth hover effect */
+    }
+
+    td:hover {
+      white-space: normal;
+      /* Allow text to wrap and show in full on hover */
+      background-color: #f0f0f0;
+      /* Background color on hover */
+    }
+  </style>
   <title>Hello, world!</title>
 </head>
+{{-- create data
+User::factory()->count(50)->create(); --}}
 
 <body>
   <div class="container">
     <div class="row">
       <div class='col'>
-        <table class="table">
+        <h1>Mutiple</h1>
+        <table class="table table-bordered">
           <thead>
             <tr>
-              <th scope="col">User Inpromation</th>
+              <th scope="col">#</th>
+              <th scope="col">User ID</th>
+              <th scope="col">Raw Path</th>
+              <th scope="col">Image</th>
+
 
             </tr>
           </thead>
+          @php
+          $id = 1
+          @endphp
+          @foreach ($images as $row)
           <tbody>
             <tr>
-              <th scope="row">ID</th>
-              <td>{{ $user->id }}</td>
+              <th scope="row">{{ $id++ }}</th>
+              <td>{{$row->user_id }}</td>
+              <td>{{$row->path }}</td>
 
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>{{ $user->fname }}</td>
+              <td>
+                @foreach (json_decode($row->path) as $list)
+                <embed src="{{ url($list) }}" style="width:100px; height:100px; display: inline-block;" frameborder="0"
+                  loading="lazy">
+                @endforeach
+              </td>
 
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>{{ $user->email }}</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>{{ $user->address }}</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <a href="{{ url('/user/word-export/'.$user->id) }}" class="btn btn-primary">
-                  Export Word
-                </a>
-              </th>
 
-            </tr>
+
           </tbody>
+          @endforeach
+
         </table>
       </div>
     </div>

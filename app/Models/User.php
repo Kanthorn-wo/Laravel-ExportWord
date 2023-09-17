@@ -14,13 +14,23 @@ class User extends Authenticatable
     {
         return $this->hasMany(Coop14::class);
     }
+
+    public function forms()
+    {
+        return $this->hasMany(Form::class);
+    }
     /**
      * The attributes that are mass assignable.
      *
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'branch_id',
+        'prefix_name_id',
+        'personal_id',
+        'student_id',
+        'fname',
+        'lname',
         'email',
         'password',
     ];

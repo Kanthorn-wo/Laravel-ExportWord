@@ -10,48 +10,44 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
     integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 
-  <title>Hello, world!</title>
+  <title>Form List</title>
 </head>
 
 <body>
   <div class="container">
+    <a href="{{ url('/user') }}" class="btn btn-danger">
+      Back Home
+    </a>
     <div class="row">
       <div class='col'>
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">User Inpromation</th>
+              <th scope="col">#</th>
+              <th scope="col">Document uuid</th>
+              <th scope="col">Student ID</th>
+              <th scope="col">Name</th>
 
-            </tr>
           </thead>
+          @php
+          $id = 1
+          @endphp
+          @foreach ($list as $item)
           <tbody>
             <tr>
-              <th scope="row">ID</th>
-              <td>{{ $user->id }}</td>
+              <th scope="row">{{ $id++ }}</th>
+              <td>{{ $item->uuid }}</td>
+              <td>{{ $item->user->student_id }}</td>
+              <td>{{ $item->user->fname }} {{ $item->user->lname }}</td>
+              <td></td>
 
-            </tr>
-            <tr>
-              <th scope="row">2</th>
-              <td>{{ $user->fname }}</td>
 
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>{{ $user->email }}</td>
-            </tr>
-            <tr>
-              <th scope="row">3</th>
-              <td>{{ $user->address }}</td>
-            </tr>
-            <tr>
-              <th scope="row">
-                <a href="{{ url('/user/word-export/'.$user->id) }}" class="btn btn-primary">
-                  Export Word
-                </a>
-              </th>
+
 
             </tr>
           </tbody>
+          @endforeach
+
         </table>
       </div>
     </div>
